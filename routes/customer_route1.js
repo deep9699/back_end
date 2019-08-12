@@ -1,9 +1,9 @@
-var user_mod=require("../model/user");
+var customer=require('../models/customer_model');
 var express=require('express');
 var router=express.Router();
 
-router.get('/:cat_id',function(req,res,next){
-    user_mod.getProByCatId(req.params.cat_id,function(err,rows){
+router.post('/',function(req,res,next){
+    customer.insertCustomer(req.body,function(err,rows){
         if(err)
         {
             res.json(err);
@@ -15,8 +15,8 @@ router.get('/:cat_id',function(req,res,next){
     });
 });
 
-router.get('/:c_id/:p_id',function(req,res,next){
-    user_mod.getProByCatId(req.params.c_id,req.params.p_id,function(err,rows){
+router.put('/',function(req,res,next){
+    customer.updateCustomerPassword(req.body,function(err,rows){
         if(err)
         {
             res.json(err);
@@ -27,4 +27,5 @@ router.get('/:c_id/:p_id',function(req,res,next){
         }
     });
 });
+
 module.exports=router;

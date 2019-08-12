@@ -1,9 +1,9 @@
-var category=require('../models/category_model');
+var order=require('../models/order_model');
 var express=require('express');
 var router=express.Router();
 
 router.get('/',function(req,res,next){
-    category.getAllCategory(function(err,rows){
+    order.getDoneOrder(function(err,rows){
         if(err)
         {
             res.json(err);
@@ -15,8 +15,8 @@ router.get('/',function(req,res,next){
     });
 });
 
-router.post('/',function(req,res,next){
-    category.addCategory(req.body,function(err,rows){
+router.put('/:status',function(req,res,next){
+    order.updateStatus(req.params.status,req.body,function(err,rows){
         if(err)
         {
             res.json(err);

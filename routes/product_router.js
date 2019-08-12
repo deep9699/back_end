@@ -1,33 +1,33 @@
-var product=require('../model/product_model');
-var express=require('express');
-var router=express.Router();
+var product = require("../models/product_model");
+var express = require("express");
+var router = express.Router();
 
-router.get('/:id?',function(req,res,next){
-    if(req.params.id){
+router.get('/:id?', function (req, res, next) {
+
+    if (req.params.id) {
         product.getProductById(req.params.id,function(err,rows){
-            if(err)
-            {
+            if(err){
                 res.json(err);
             }
-            else
-            {
+            else{
                 res.json(rows);
-            }    
+            }
         });
     }
-    else{
-    product.getAllProduct(function(err,rows){
-        if(err)
-        {
-            res.json(err);
-        }
-        else
-        {
-            res.json(rows);
-        }
-    });
-}
+    else {
+
+        product.getAllProduct(function (err, rows) {
+            if (err) {
+                res.json(err);
+            }
+            else {
+                res.json(rows);
+            }
+        });
+    }
+
 });
+
 router.post('/',function(req,res,next){
     product.addProduct(req.body,function(err,rows){
         if(err)
@@ -40,8 +40,9 @@ router.post('/',function(req,res,next){
         }
     });
 });
-router.put('/:id',function(req,res,next){
-    product.updateProduct(req.body,req.params.id,function(err,rows){
+
+router.put('/',function(req,res,next){
+    product.updateProduct(req.body,function(err,rows){
         if(err)
         {
             res.json(err);
@@ -52,16 +53,4 @@ router.put('/:id',function(req,res,next){
         }
     });
 });
-router.delete('/:id',function(req,res,next){
-    product.deleteProduct(req.params.id,function(err,rows){
-        if(err)
-        {
-            res.json(err);
-        }
-        else
-        {
-            res.json(rows);
-        }
-    });
-});
-module.exports=router;
+module.exports = router;

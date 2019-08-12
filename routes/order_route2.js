@@ -1,9 +1,9 @@
-var user_mod=require("../model/user");
+var order=require('../models/order_model');
 var express=require('express');
 var router=express.Router();
 
-router.post('/',function(req,res,next){
-    user_mod.addUsermod(req.body,function(err,rows){
+router.get('/',function(req,res,next){
+    order.getCancelOrder(function(err,rows){
         if(err)
         {
             res.json(err);
@@ -14,5 +14,4 @@ router.post('/',function(req,res,next){
         }
     });
 });
-
 module.exports=router;
